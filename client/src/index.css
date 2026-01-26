@@ -1,0 +1,127 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --animate-in: animate-in 0.3s ease-out;
+  --animate-out: animate-out 0.3s ease-in;
+}
+
+/* LIGHT MODE - Light Green & White */
+:root {
+  --background: 40 20% 99%; /* Off-white */
+  --foreground: 240 5% 20%; /* Dark Gray text */
+
+  --card: 0 0% 100%;
+  --card-foreground: 240 5% 20%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 5% 20%;
+
+  /* Light Green Primary #90ee90 -> 120 73% 75% */
+  /* Using a slightly darker version for better visibility on white backgrounds, 
+     or keeping it true to request and using dark text on it */
+  --primary: 120 73% 75%; 
+  --primary-foreground: 120 95% 15%; /* Dark green text for contrast */
+
+  --secondary: 120 20% 96%;
+  --secondary-foreground: 240 5% 20%;
+
+  --muted: 240 5% 96%;
+  --muted-foreground: 240 5% 45%;
+
+  --accent: 120 60% 96%; 
+  --accent-foreground: 120 90% 25%; 
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 240 5% 90%;
+  --input: 240 5% 90%;
+  --ring: 120 73% 75%;
+
+  --radius: 0.75rem;
+}
+
+/* DARK MODE - Green, White, Gray */
+.dark {
+  --background: 240 5% 10%; /* Very dark gray/black */
+  --foreground: 0 0% 98%; /* White text */
+
+  --card: 240 5% 14%; /* Slightly lighter dark gray */
+  --card-foreground: 0 0% 98%;
+
+  --popover: 240 5% 14%;
+  --popover-foreground: 0 0% 98%;
+
+  /* Green Primary */
+  --primary: 150 60% 50%;
+  --primary-foreground: 240 5% 10%;
+
+  --secondary: 240 5% 18%;
+  --secondary-foreground: 0 0% 98%;
+
+  --muted: 240 5% 20%;
+  --muted-foreground: 240 5% 65%;
+
+  --accent: 150 30% 18%; /* Dark green tint */
+  --accent-foreground: 150 60% 60%; /* Light green text */
+
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 240 5% 20%;
+  --input: 240 5% 20%;
+  --ring: 150 60% 50%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground transition-colors duration-300;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold tracking-tight;
+  }
+}
+
+
