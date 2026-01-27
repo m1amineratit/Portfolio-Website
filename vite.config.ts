@@ -37,7 +37,7 @@ export default defineConfig({
   },
   root: "client", // relative path
   build: {
-    outDir: "../dist", // relative path → Vercel compatible
+    outDir: "dist", // relative path → Vercel compatible
     emptyOutDir: true,
   },
   server: {
