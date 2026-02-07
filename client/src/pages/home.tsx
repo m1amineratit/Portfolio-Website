@@ -2,6 +2,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { BackendProjectCard } from "@/components/backend-project-card";
 import { SkillsSection } from "@/components/skills-section";
 import { ServicesSection } from "@/components/services-section";
+import { ProductSalesSection } from "@/components/product-sales-section";
 import { HeroImage } from "@/components/hero-image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,8 +10,13 @@ import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { Mail, Github, Linkedin, Award, Briefcase, Code, Calendar } from "lucide-react";
 import profileImageNew from "@assets/profile_new.png";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
+  const sectionIds = ["about", "products", "projects", "services", "skills", "experience", "contact"];
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [activeSection, setActiveSection] = useState("about");
+
   const backendProjects = [
     {
       title: "Restaurant Management System",
@@ -130,48 +136,110 @@ export default function Home() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
     }
   };
 
+  useEffect(() => {
+    const container = sliderRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        root: container,
+        threshold: 0.55,
+      },
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [sectionIds]);
+
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20">
+    <div className="h-[100svh] w-full bg-background text-foreground selection:bg-primary/20 overflow-hidden">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
-        <div className="container max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="text-xl font-bold font-heading tracking-tight">byamine.dev</span>
-          <div className="flex items-center gap-6">
-            <div className="hidden md:flex items-center gap-6">
-              <button
-                onClick={() => scrollToSection("about")}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                About
-              </button>
-              <button
-                onClick={() => scrollToSection("projects")}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Projects
-              </button>
-              <button
-                onClick={() => scrollToSection("services")}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Services
-              </button>
-              <button
-                onClick={() => scrollToSection("skills")}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Skills
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Contact
-              </button>
+      <nav className="fixed top-6 left-0 right-0 z-50">
+        <div className="container max-w-6xl mx-auto px-6">
+          <div className="flex items-center gap-4">
+            <span className="text-xl font-bold font-heading tracking-tight">byamine.dev</span>
+            <div className="flex-1 hidden md:flex justify-center">
+              <div className="flex items-center gap-2 rounded-full bg-card/80 border border-border/60 shadow-lg shadow-black/20 backdrop-blur-xl px-2 py-2">
+                <button
+                  onClick={() => scrollToSection("about")}
+                  className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                    activeSection === "about"
+                      ? "text-foreground bg-muted/60"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  About
+                </button>
+                <button
+                  onClick={() => scrollToSection("products")}
+                  className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                    activeSection === "products"
+                      ? "text-foreground bg-muted/60"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  Products
+                </button>
+                <button
+                  onClick={() => scrollToSection("projects")}
+                  className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                    activeSection === "projects"
+                      ? "text-foreground bg-muted/60"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  Projects
+                </button>
+                <button
+                  onClick={() => scrollToSection("services")}
+                  className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                    activeSection === "services"
+                      ? "text-foreground bg-muted/60"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  Services
+                </button>
+                <button
+                  onClick={() => scrollToSection("skills")}
+                  className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                    activeSection === "skills"
+                      ? "text-foreground bg-muted/60"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  Skills
+                </button>
+                <button
+                  onClick={() => scrollToSection("contact")}
+                  className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                    activeSection === "contact"
+                      ? "text-foreground bg-muted/60"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  Contact
+                </button>
+              </div>
             </div>
             <div className="flex items-center gap-4">
               <ThemeToggle />
@@ -187,8 +255,12 @@ export default function Home() {
         </div>
       </nav>
 
+      <div
+        ref={sliderRef}
+        className="h-[100svh] w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth flex"
+      >
       {/* Hero / About Section */}
-      <section id="about" className="pt-32 pb-20 px-6">
+      <section id="about" className="w-full min-w-full h-[100svh] snap-start overflow-y-auto pt-32 pb-20 px-6">
         <div className="container max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -268,10 +340,12 @@ export default function Home() {
         </div>
       </section>
 
+      <ProductSalesSection />
+
       {/* Projects Section - Grid */}
       <section
         id="projects"
-        className="py-20 px-6 bg-secondary/30"
+        className="w-full min-w-full h-[100svh] snap-start overflow-y-auto py-20 px-6 bg-secondary/30"
       >
         <div className="container max-w-6xl mx-auto">
           <motion.div
@@ -300,7 +374,7 @@ export default function Home() {
       <SkillsSection />
 
       {/* Experience / Achievements Section */}
-      <section id="experience" className="py-20 px-6 bg-secondary/30">
+      <section id="experience" className="w-full min-w-full h-[100svh] snap-start overflow-y-auto py-20 px-6 bg-secondary/30">
         <div className="container max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -355,97 +429,174 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-6">
+      <section id="contact" className="w-full min-w-full h-[100svh] snap-start overflow-y-auto py-20 px-6 flex flex-col">
         <div className="container max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center max-w-2xl mx-auto"
-          >
-            <h2 className="text-3xl sm:text-4xl font-heading font-bold mb-4">Let's Work Together</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              I'm available for freelance backend development projects, SaaS platform development, API design, and custom backend solutions.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              <Button
-                size="lg"
-                className="rounded-full px-8 h-12 text-base w-full sm:w-auto"
-                asChild
-              >
-                <a href="mailto:contact@byamine.dev">
-                  <Mail className="w-5 h-5 mr-2" />
-                  Get In Touch
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 items-start">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <Badge className="mb-4 bg-primary/10 text-primary">Contact</Badge>
+              <h2 className="text-3xl sm:text-4xl font-heading font-bold mb-4">Let’s build something reliable.</h2>
+              <p className="text-lg text-muted-foreground mb-6">
+                Tell me about your project and I’ll respond with a clear plan, timeline, and next steps.
+                This form is ready for your backend API endpoint.
+              </p>
+              <div className="space-y-3 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-primary" />
+                  Response within 24–48 hours
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-primary" />
+                  NDA-friendly and client-ready
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-primary" />
+                  Clear scope and milestones
+                </div>
+              </div>
+              <div className="mt-6 flex gap-5">
+                <a
+                  href="https://github.com/m1amineratit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Github className="w-6 h-6" />
                 </a>
-              </Button>
-              <Button
-                size="lg"
-                variant="default"
-                className="rounded-full px-8 h-12 text-base w-full sm:w-auto bg-primary hover:bg-primary/90"
-                asChild
-              >
-                <a href="mailto:contact@byamine.dev?subject=Project%20Inquiry">
-                  Start a Project
+                <a
+                  href="https://linkedin.com/in/m1amineratit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Linkedin className="w-6 h-6" />
                 </a>
-              </Button>
-            </div>
-            <div className="flex justify-center gap-6">
-              <a
-                href="https://github.com/m1amineratit"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Github className="w-6 h-6" />
-              </a>
-              <a
-                href="https://linkedin.com/in/m1amineratit"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Linkedin className="w-6 h-6" />
-              </a>
-              <a
-                href="mailto:contact@byamine.dev"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Mail className="w-6 h-6" />
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+                <a
+                  href="mailto:contact@byamine.dev"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Mail className="w-6 h-6" />
+                </a>
+              </div>
+            </motion.div>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border/40">
-        <div className="container max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-center md:text-left">
-            <span className="text-lg font-bold font-heading tracking-tight block mb-2">byamine.dev</span>
-            <p className="text-sm text-muted-foreground">© 2024. All rights reserved.</p>
-          </div>
-          <div className="flex gap-6 text-sm text-muted-foreground">
-            <button
-              onClick={() => scrollToSection("about")}
-              className="hover:text-primary transition-colors"
+            <motion.form
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="rounded-3xl border border-border/60 bg-card/60 backdrop-blur-sm p-6 md:p-8 shadow-lg"
+              onSubmit={(event) => {
+                event.preventDefault();
+              }}
             >
-              About
-            </button>
-            <button
-              onClick={() => scrollToSection("projects")}
-              className="hover:text-primary transition-colors"
-            >
-              Projects
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="hover:text-primary transition-colors"
-            >
-              Contact
-            </button>
+              <div className="grid gap-5">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <label className="text-sm font-medium">
+                    Full Name
+                    <input
+                      name="name"
+                      type="text"
+                      required
+                      placeholder="Your name"
+                      className="mt-2 w-full rounded-xl border border-border/60 bg-background/70 px-4 py-3 text-sm outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20"
+                    />
+                  </label>
+                  <label className="text-sm font-medium">
+                    Email
+                    <input
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="you@email.com"
+                      className="mt-2 w-full rounded-xl border border-border/60 bg-background/70 px-4 py-3 text-sm outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20"
+                    />
+                  </label>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <label className="text-sm font-medium">
+                    Company
+                    <input
+                      name="company"
+                      type="text"
+                      placeholder="Company or product"
+                      className="mt-2 w-full rounded-xl border border-border/60 bg-background/70 px-4 py-3 text-sm outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20"
+                    />
+                  </label>
+                  <label className="text-sm font-medium">
+                    Project Type
+                    <select
+                      name="projectType"
+                      className="mt-2 w-full rounded-xl border border-border/60 bg-background/70 px-4 py-3 text-sm outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20"
+                      defaultValue="backend"
+                    >
+                      <option value="backend">Backend build</option>
+                      <option value="api">API design</option>
+                      <option value="saas">SaaS platform</option>
+                      <option value="consulting">Consulting</option>
+                    </select>
+                  </label>
+                </div>
+                <label className="text-sm font-medium">
+                  Project Details
+                  <textarea
+                    name="message"
+                    required
+                    rows={5}
+                    placeholder="Briefly describe goals, timeline, and stack."
+                    className="mt-2 w-full rounded-xl border border-border/60 bg-background/70 px-4 py-3 text-sm outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20"
+                  />
+                </label>
+                <label className="flex items-start gap-2 text-xs text-muted-foreground">
+                  <input type="checkbox" name="updates" className="mt-0.5" />
+                  Send me occasional updates about new backend products and resources.
+                </label>
+                <Button size="lg" className="rounded-full">
+                  Send Message
+                </Button>
+              </div>
+            </motion.form>
           </div>
         </div>
-      </footer>
+        <footer className="mt-16 border-t border-border/40">
+          <div className="container max-w-6xl mx-auto py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="text-center md:text-left">
+              <span className="text-lg font-bold font-heading tracking-tight block mb-2">byamine.dev</span>
+              <p className="text-sm text-muted-foreground">(c) 2024. All rights reserved.</p>
+            </div>
+            <div className="flex gap-6 text-sm text-muted-foreground">
+              <button
+                onClick={() => scrollToSection("about")}
+                className="hover:text-primary transition-colors"
+              >
+                About
+              </button>
+              <button
+                onClick={() => scrollToSection("projects")}
+                className="hover:text-primary transition-colors"
+              >
+                Projects
+              </button>
+              <button
+                onClick={() => scrollToSection("products")}
+                className="hover:text-primary transition-colors"
+              >
+                Products
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="hover:text-primary transition-colors"
+              >
+                Contact
+              </button>
+            </div>
+          </div>
+        </footer>
+      </section>
+      </div>
     </div>
   );
 }
+

@@ -86,7 +86,7 @@ export function SkillsSection() {
   const categories = Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>;
 
   return (
-    <section id="skills" className="py-20 px-6">
+    <section id="skills" className="w-full min-w-full h-[100svh] snap-start overflow-y-auto py-20 px-6">
       <div className="container max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
