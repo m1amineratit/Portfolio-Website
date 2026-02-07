@@ -190,16 +190,6 @@ export default function Home() {
                   About
                 </button>
                 <button
-                  onClick={() => scrollToSection("products")}
-                  className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
-                    activeSection === "products"
-                      ? "text-foreground bg-muted/60"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                  }`}
-                >
-                  Products
-                </button>
-                <button
                   onClick={() => scrollToSection("projects")}
                   className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
                     activeSection === "projects"

@@ -17,8 +17,8 @@ import {
 const products = [
   {
     title: "Backend Starter Kit",
-    badge: "Coming Soon",
-    price: "Launching Soon",
+    badge: "Best Seller",
+    price: "From $49",
     description:
       "Production-ready Django + PostgreSQL setup with auth, payments, testing, CI, and deployment docs.",
     icon: Package,
@@ -28,12 +28,12 @@ const products = [
       "Stripe billing and webhooks",
       "Docker + production checklist",
     ],
-    cta: "Notify Me",
+    cta: "Get the Kit",
   },
   {
     title: "Backend Systems Ebook",
-    badge: "Coming Soon",
-    price: "Launching Soon",
+    badge: "Quick Read",
+    price: "$19",
     description:
       "A practical guide to building scalable APIs, data models, and reliable systems with clear patterns.",
     icon: BookOpen,
@@ -43,12 +43,12 @@ const products = [
       "Security & auth essentials",
       "Performance & observability",
     ],
-    cta: "Notify Me",
+    cta: "Read the Ebook",
   },
   {
     title: "API Mastery Course",
-    badge: "Coming Soon",
-    price: "Launching Soon",
+    badge: "New",
+    price: "$129",
     description:
       "Step-by-step course that takes you from idea to deployed API with real-world workflows.",
     icon: PlayCircle,
@@ -58,45 +58,45 @@ const products = [
       "Scaling & caching strategies",
       "Project templates included",
     ],
-    cta: "Notify Me",
+    cta: "Start the Course",
   },
 ];
 
 const trustItems = [
   {
-    title: "Early Access",
-    description: "Get notified before the public launch.",
+    title: "Instant Access",
+    description: "Download immediately after checkout.",
     icon: Download,
   },
   {
-    title: "Launch Updates",
-    description: "Progress updates and release notes.",
+    title: "Secure Checkout",
+    description: "Trusted payment providers and SSL.",
     icon: ShieldCheck,
   },
   {
-    title: "Founders Discount",
-    description: "Early pricing for first supporters.",
+    title: "Practical Content",
+    description: "Built from real client systems.",
     icon: Zap,
   },
   {
-    title: "Quality Focus",
-    description: "Built from real client systems.",
+    title: "Bonus Updates",
+    description: "Future improvements included.",
     icon: Sparkles,
   },
 ];
 
 const faqs = [
   {
-    q: "When will the products launch?",
-    a: "They are in active development. Join the waitlist to get the launch date first.",
+    q: "Who are these products for?",
+    a: "Backend developers and founders who want production-ready patterns without fluff.",
   },
   {
-    q: "What is included?",
-    a: "A starter kit, an ebook, and a course focused on production-ready backend systems.",
+    q: "Do I get updates?",
+    a: "Yes. You receive future updates and improvements to the product you purchase.",
   },
   {
-    q: "How do I get early access?",
-    a: "Send a message through the contact form and I will add you to the early access list.",
+    q: "Is there a refund policy?",
+    a: "If it is not a fit, reach out within 14 days and I will make it right.",
   },
 ];
 
@@ -122,17 +122,17 @@ export function ProductSalesSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Badge className="mb-4 bg-primary/10 text-primary">Coming Soon</Badge>
+              <Badge className="mb-4 bg-primary/10 text-primary">Digital Products</Badge>
               <h2 className="text-3xl sm:text-4xl font-heading font-bold leading-tight">
-                New backend products are launching soon.
+                Ship backend products faster with proven templates, guides, and systems.
               </h2>
               <p className="mt-4 text-lg text-muted-foreground max-w-xl">
-                I am finishing a starter kit, an ebook, and a course focused on production-ready backend systems.
-                Join the waitlist to get early access and launch updates.
+                Built for busy backend developers. No fluff, just practical architecture, production checklists,
+                and launch-ready code so you can build with confidence.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button size="lg" className="rounded-full px-7" onClick={() => scrollToSection("contact")}>
-                  Join Waitlist
+                  Get Access
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
                 <Button
@@ -147,22 +147,22 @@ export function ProductSalesSection() {
               <div className="mt-6 flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <span className="inline-flex items-center gap-2">
                   <Check className="w-4 h-4 text-primary" />
-                  Starter kit, ebook, and course
+                  Built for Django + modern stacks
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <Check className="w-4 h-4 text-primary" />
-                  Production-first, practical guidance
+                  Practical, production-first guidance
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <Check className="w-4 h-4 text-primary" />
-                  Early access notifications
+                  Source code + templates included
                 </span>
               </div>
             </motion.div>
 
             <Card className="border border-primary/40 bg-card/70 shadow-xl shadow-primary/10">
               <CardHeader className="pb-2">
-                <Badge className="w-fit bg-primary/15 text-primary">Launch Bundle</Badge>
+                <Badge className="w-fit bg-primary/15 text-primary">Featured Bundle</Badge>
                 <CardTitle className="text-2xl font-heading mt-3">Complete Backend Launch Pack</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -170,8 +170,8 @@ export function ProductSalesSection() {
                   Everything you need to plan, build, and launch a reliable backend - in one bundle.
                 </p>
                 <div className="flex items-end gap-2">
-                  <span className="text-3xl font-semibold">Coming Soon</span>
-                  <span className="text-sm text-muted-foreground">join the waitlist</span>
+                  <span className="text-3xl font-semibold">$179</span>
+                  <span className="text-sm text-muted-foreground">limited launch price</span>
                 </div>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
@@ -192,10 +192,10 @@ export function ProductSalesSection() {
                   className="w-full rounded-full"
                   onClick={() => scrollToSection("contact")}
                 >
-                  Join Waitlist
+                  Get the Bundle
                 </Button>
                 <p className="text-xs text-muted-foreground text-center">
-                  Early access list - launch updates - future bonuses
+                  Secure checkout - Instant access - 14-day guarantee
                 </p>
               </CardContent>
             </Card>
@@ -271,11 +271,11 @@ export function ProductSalesSection() {
 
         <div className="mt-12 grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-start">
           <div className="rounded-3xl border border-border/60 bg-card/40 p-6 md:p-8">
-            <h3 className="text-2xl font-heading font-semibold mb-4">Why these products exist</h3>
+            <h3 className="text-2xl font-heading font-semibold mb-4">Why developers buy these</h3>
             <div className="space-y-4 text-sm text-muted-foreground">
               <p>
-                I want backend developers to skip the boilerplate and start from a clear, production-ready
-                foundation that mirrors real client work.
+                You get a clear, professional structure for backend systems without wasting weeks on boilerplate.
+                Everything is organized, production-ready, and easy to extend for real client work.
               </p>
               <p>
                 Each product includes templates, architecture notes, and practical guidance so you can launch
@@ -299,13 +299,13 @@ export function ProductSalesSection() {
 
         <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-4 rounded-3xl border border-primary/30 bg-primary/10 px-6 py-6">
           <div>
-            <h3 className="text-xl font-heading font-semibold">Want early access?</h3>
+            <h3 className="text-xl font-heading font-semibold">Ready to ship your next backend product?</h3>
             <p className="text-sm text-muted-foreground">
-              Join the waitlist and I will notify you when the products launch.
+              Pick a product above or grab the bundle to save time and launch with confidence.
             </p>
           </div>
           <Button size="lg" className="rounded-full px-8" onClick={() => scrollToSection("contact")}>
-            Join Waitlist
+            Contact for Details
             <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
         </div>
