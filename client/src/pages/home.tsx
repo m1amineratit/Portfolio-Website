@@ -330,7 +330,6 @@ export default function Home() {
         </div>
       </section>
 
-      <ProductSalesSection />
 
       {/* Projects Section - Grid */}
       <section
